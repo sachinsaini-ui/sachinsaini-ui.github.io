@@ -1,18 +1,19 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $from = $_POST['from'];
     $to = $_POST['to'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
-    $headers = 'From: your-email@example.com' . "\r\n" .
-               'Reply-To: your-email@example.com' . "\r\n" .
+    $headers = 'From: ' . $from . "\r\n" .
+               'Reply-To: ' . $from . "\r\n" .
                'X-Mailer: PHP/' . phpversion();
 
     if (mail($to, $subject, $message, $headers)) {
-        echo "Email sent successfully to $to";
+        echo "<p>Email sent successfully from $from to $to</p>";
     } else {
-        echo "Failed to send email.";
+        echo "<p>Failed to send email.</p>";
     }
 } else {
-    echo "Invalid request.";
+    echo "<p>Invalid request.</p>";
 }
 ?>
