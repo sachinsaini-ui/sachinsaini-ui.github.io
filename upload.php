@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // Set the upload directory
-$uploadDir = 'https://rahultech.me/uploads/';
+$uploadDir = 'uploads/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
