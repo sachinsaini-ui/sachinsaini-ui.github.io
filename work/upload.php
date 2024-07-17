@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 // Set the upload directory
-$uploadDir = 'uploads/';
+$uploadDir = 'work/uploads/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
