@@ -1,23 +1,34 @@
 <?php
 header('Content-Type: application/json');
 
-// Set the upload directory (filesystem path, not URL)
-$uploadDir = __DIR__ . '/uploads/';
-if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0777, true);
+$targetDir = "uploads/";
+if (!is_dir($targetDir)) {
+    mkdir($targetDir, 0777, true);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
-    $file = $_FILES['image'];
-    $uploadFilePath = $uploadDir . basename($file['name']);
+$targetFile = $targetDir . basename($_FILES["image"]["name"]);
+$imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-    if (move_uploaded_file($file['tmp_name'], $uploadFilePath)) {
-        $url = 'https://rahultech.me/uploads/' . basename($file['name']);  // URL path to the uploaded file
-        echo json_encode(['success' => true, 'url' => $url]);
+// Check if image file is a actual image or fake image
+$check = getimagesize($_FILES["image"]["tmp_name"]);
+if($check !== false) {
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+        $response = array(
+            "success" => true,
+            "url" => "http://rahultech.me/" . $targetFile
+        );
     } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to move uploaded file.']);
+        $response = array(
+            "success" => false,
+            "message" => "Sorry, there was an error uploading your file."
+        );
     }
 } else {
-    echo json_encode(['success' => false, 'message' => 'No file uploaded.']);
+    $response = array(
+        "success" => false,
+        "message" => "File is not an image."
+    );
 }
+
+echo json_encode($response);
 ?>
