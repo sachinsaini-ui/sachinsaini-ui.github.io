@@ -1,108 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Upload</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        input[type="file"] {
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #result {
-            margin-top: 20px;
-        }
-        #imageUrl a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        #imageUrl a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Upload Tool</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+input[type="file"] {
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#output {
+  margin-top: 20px;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Upload Image</h1>
-        <form id="uploadForm">
-            <input type="file" id="imageInput" accept="image/*" required>
-            <button type="submit">Upload</button>
-        </form>
-        <div id="result">
-            <p id="status"></p>
-            <p id="imageUrl"></p>
-        </div>
-    </div>
-    <script>
-        document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+  <div class="container">
+    <h1>Image Upload Tool</h1>
+    <input type="file" id="imageUpload" accept="image/*">
+    <button onclick="uploadImage()">Upload Image</button>
+    <div id="output"></div>
+  </div>
+  <script>
+    function uploadImage() {
+      const fileInput = document.getElementById('imageUpload');
+      const output = document.getElementById('output');
 
-            const imageInput = document.getElementById('imageInput');
-            const statusElement = document.getElementById('status');
-            const imageUrlElement = document.getElementById('imageUrl');
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const imageUrl = URL.createObjectURL(file);
 
-            if (imageInput.files.length === 0) {
-                statusElement.textContent = 'Please select an image to upload.';
-                return;
-            }
+        const imageLink = document.createElement('a');
+        imageLink.href = imageUrl;
+        imageLink.textContent = 'Click here to view your image';
+        imageLink.target = '_blank';
 
-            const file = imageInput.files[0];
-            const formData = new FormData();
-            formData.append('image', file);
-
-            fetch('https://rahultech.me/work/upload.php', {  // Path to your PHP file
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    statusElement.textContent = 'Upload successful!';
-                    imageUrlElement.innerHTML = `Image URL: <a href="${data.url}" target="_blank">${data.url}</a>`;
-                } else {
-                    statusElement.textContent = 'Upload failed. Please try again.';
-                }
-            })
-            .catch(error => {
-                console.error('Error uploading image:', error);
-                statusElement.textContent = 'An error occurred. Please try again.';
-            });
-        });
-    </script>
+        output.innerHTML = ''; // Clear previous output
+        output.appendChild(imageLink);
+      } else {
+        output.textContent = 'Please select an image to upload.';
+      }
+    }
+  </script>
 </body>
 </html>
-
