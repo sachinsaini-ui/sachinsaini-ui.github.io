@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to my WEB!!</title>
-    <link rel="icon" href="https://www.iconfinder.com/icons/1179447/cloud_computing_network_online_storage_icon" type="image/x-icon">
+    <title>Welcome to my WEB!</title>
+    <link rel="icon" href="https://www.iconfinder.com/data/icons/cloud-computing-22/100/cloud_web-512.png" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
 
@@ -77,6 +77,21 @@
             50% { transform: translateY(-1000px) scale(1.5); }
             100% { transform: translateY(0) scale(1); }
         }
+
+        .play-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -85,6 +100,7 @@
         <p>Please be patient, it will be available soon!</p>
     </div>
     <div class="particles" id="particles"></div>
+    <button class="play-button" onclick="playAudio()">Play Background Music</button>
     <audio id="bgm" loop>
         <source src="https://www.bensound.com/bensound-music/bensound-summer.mp3" type="audio/mp3">
         Your browser does not support the audio element.
@@ -109,13 +125,10 @@
 
         setInterval(createParticle, 500);
 
-        // Play background music
-        const bgm = document.getElementById('bgm');
-        bgm.play().catch(() => {
-            document.body.addEventListener('click', () => {
-                bgm.play();
-            }, { once: true });
-        });
+        function playAudio() {
+            const bgm = document.getElementById('bgm');
+            bgm.play();
+        }
     </script>
 </body>
 </html>
