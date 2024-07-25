@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to my WEB!</title>
+    <link rel="icon" href="https://www.iconfinder.com/icons/1179447/cloud_computing_network_online_storage_icon" type="image/x-icon">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+
         body, html {
             margin: 0;
             padding: 0;
@@ -13,26 +16,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b);
-            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            font-family: 'Montserrat', sans-serif;
             overflow: hidden;
         }
         
         .container {
             text-align: center;
-            color: white;
+            color: #ffffff;
             animation: fadeIn 2s ease-in-out;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            animation: textAnimation 3s ease-in-out infinite;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textWave 3s ease-in-out infinite;
         }
 
         p {
-            font-size: 1.5rem;
-            animation: textAnimation 3s ease-in-out infinite;
+            font-size: 2rem;
+            font-weight: 300;
+            animation: textWave 3s ease-in-out infinite;
         }
 
         @keyframes fadeIn {
@@ -40,9 +48,9 @@
             100% { opacity: 1; }
         }
 
-        @keyframes textAnimation {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        @keyframes textWave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .particles {
@@ -77,6 +85,10 @@
         <p>Please be patient, it will be available soon!</p>
     </div>
     <div class="particles" id="particles"></div>
+    <audio id="bgm" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-summer.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 
     <script>
         function createParticle() {
@@ -96,6 +108,14 @@
         }
 
         setInterval(createParticle, 500);
+
+        // Play background music
+        const bgm = document.getElementById('bgm');
+        bgm.play().catch(() => {
+            document.body.addEventListener('click', () => {
+                bgm.play();
+            }, { once: true });
+        });
     </script>
 </body>
 </html>
