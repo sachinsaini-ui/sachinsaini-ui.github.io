@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to my WEB!</title>
-    <link rel="icon" href="https://www.iconfinder.com/data/icons/cloud-computing-22/100/cloud_web-512.png" type="image/x-icon">
+    <link rel="icon" href="https://rahultech.me/favico.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@300;700&display=swap">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
-
         body, html {
             margin: 0;
             padding: 0;
@@ -16,7 +15,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
         }
@@ -28,7 +27,8 @@
         }
 
         h1 {
-            font-size: 4rem;
+            font-family: 'Pacifico', cursive;
+            font-size: 5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             background: linear-gradient(90deg, #ff8a00, #e52e71);
@@ -65,8 +65,8 @@
 
         .particle {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
             animation: float 10s infinite;
@@ -82,15 +82,18 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #ffffff;
-            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            background: url('https://rahultech.me/music.jpg') no-repeat center center;
+            background-size: contain;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
             z-index: 1000;
+            opacity: 0.8;
+        }
+
+        .play-button:hover {
+            opacity: 1;
         }
     </style>
 </head>
@@ -100,7 +103,7 @@
         <p>Please be patient, it will be available soon!</p>
     </div>
     <div class="particles" id="particles"></div>
-    <button class="play-button" onclick="playAudio()">Play Background Music</button>
+    <button class="play-button" onclick="playAudio()"></button>
     <audio id="bgm" loop>
         <source src="https://www.bensound.com/bensound-music/bensound-summer.mp3" type="audio/mp3">
         Your browser does not support the audio element.
