@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embed Vegamovies</title>
+    <title>Vegamovies</title>
     <style>
         body, html {
             margin: 0;
@@ -20,12 +20,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            display: none;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: none;
         }
         .spinner {
             border: 16px solid #f3f3f3; 
@@ -44,13 +44,13 @@
 <body>
     <div class="spinner" id="spinner"></div>
     <div class="iframe-container" id="iframe-container">
-        <iframe src="https://vegamovies.nz" frameborder="0" onload="hideSpinner()"></iframe>
+        <iframe id="iframe" src="https://vegamovies.nz" frameborder="0" onload="hideSpinner()"></iframe>
     </div>
 
     <script>
         function hideSpinner() {
             document.getElementById('spinner').style.display = 'none';
-            document.getElementById('iframe-container').style.display = 'block';
+            document.getElementById('iframe').style.display = 'block';
         }
     </script>
 </body>
